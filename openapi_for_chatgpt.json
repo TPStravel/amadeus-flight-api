@@ -1,0 +1,74 @@
+
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Amadeus Flights",
+    "version": "1.0.0",
+    "description": "Buscar voos reais GRU -> JFK usando Amadeus API"
+  },
+  "servers": [
+    {
+      "url": "https://amadeus-api-richard.richard.repl.co/api"
+    }
+  ],
+  "paths": {
+    "/voos": {
+      "get": {
+        "operationId": "buscarVoos",
+        "summary": "Buscar voos por origem, destino e data",
+        "parameters": [
+          {
+            "name": "origem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "GRU"
+            }
+          },
+          {
+            "name": "destino",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "JFK"
+            }
+          },
+          {
+            "name": "data",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2025-08-15"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de voos disponíveis",
+            "content": {
+              "application/json": {
+                "example": {
+                  "origem": "GRU",
+                  "destino": "JFK",
+                  "data": "2025-08-15",
+                  "voos": [
+                    {
+                      "cia": "AA",
+                      "saida": "2025-08-15T08:00:00",
+                      "chegada": "2025-08-15T16:00:00",
+                      "preco": "USD 980.00"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
